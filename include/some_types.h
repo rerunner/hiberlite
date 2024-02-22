@@ -1,6 +1,8 @@
 #ifndef SOM_TYPES_H_INCLUDED
 #define SOM_TYPES_H_INCLUDED
 
+#include <cstdint> //RERUNNER for missing uint8_t type definition
+
 namespace hiberlite{
 
 template<class E, class C>
