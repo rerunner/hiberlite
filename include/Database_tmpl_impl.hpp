@@ -84,6 +84,29 @@ std::vector<sqlid_t> Database::getBeanIds()
 	return dbSelectIds(con, getClassName<C>(),"", "" );
 }
 
+//RERUN ADDED
+template<class C>
+std::vector<sqlid_t> Database::getBeanIds(std::string sqlQuery)
+{
+    //sqlQuery --> column = 'value'
+    std::string order = "";
+    
+    return dbSelectIds(con, getClassName<C>(), sqlQuery, order);
+}
+
+//RERUN ADDED
+template<class C>
+std::vector< bean_ptr<C> > Database::getBeansByQuery(std::string sqlQuery)
+{
+        std::vector<sqlid_t> ids=getBeanIds<C>(sqlQuery);
+        size_t N=ids.size();
+        std::vector< bean_ptr<C> > ans;
+        ans.reserve(N);
+        for(size_t i=0;i<N;i++)
+                ans.push_back( loadBean<C>(ids[i]) );
+        return ans;
+}
+
 template<class C>
 std::vector< bean_ptr<C> > Database::getAllBeans()
 {
